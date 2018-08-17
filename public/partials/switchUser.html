@@ -1,0 +1,23 @@
+<h1>Switch User Page</h1>
+<br/>
+<div class="container">
+<form>
+	<div class="table-responsive">
+		<table class="table">
+			<th> Select the Active User </th>
+			<th> Select the Inactive User </th>
+			<tr>
+				<td>
+					<select ng-model="flosum.selectedActiveUser" ng-options="x.Name for x in activeUsers">
+					</select>
+				</td>
+				<td>
+					<select ng-model="flosum.selectedInactiveUser" ng-options="x.Name for x in inactiveUsers">
+					</select>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<input type="button" value="Switch User" ng-click="save()" class="btn btn-primary"></input>	
+</form>
+</div>
