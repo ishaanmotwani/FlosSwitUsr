@@ -3,12 +3,12 @@ var router = express.Router();
 
 var jsforce = require('jsforce');
 var conn = new jsforce.Connection({
-               loginUrl : 'https://login.salesforce.com'
+               loginUrl : process.env.loginURL || 'https://login.salesforce.com'
 });
 
 
 router.get('/', function(req, res1) {
-	conn.login('sonal.deshmukh@gilead.com', 'Gilead2_', function(err, res2) {
+	conn.login(process.env.admin_username, process.env.admin_password, function(err, res2) {
 		if (err) { return console.log(err); }
 
 		// querying the Flosum package Id
