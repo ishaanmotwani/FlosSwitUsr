@@ -20,7 +20,6 @@ router.post('/', function(req, res1){
 				conn.query('SELECT Id,NamespacePrefix FROM PackageLicense where NamespacePrefix = \'Flosum\'', function(err, res3) {
 					if (err) { return console.error(err); }
 					if(res3.records.length){
-						var UserPackageLicenseId;
 						var packageId = res3.records[0].Id;
 						//console.log(packageId);
 						// query the userpackageLicense
@@ -46,11 +45,10 @@ router.post('/', function(req, res1){
 							console.log('Activated '+ req.body.selectedInactiveUser.Name + ' successfully ');
 
 							// creating the UserPackageLicense record
-							if(ret.success && UserPackageLicenseId != undefined){
+							if(ret.success && packageId != undefined){
 								conn.sobject("UserPackageLicense").create({ PackageLicenseId : packageId, userId : req.body.selectedInactiveUser.Id}, function(err, ret) {
 									if (err || !ret.success) { return console.error(err, ret); }
 									console.log('Created UserPackageLicense record successfully for : ' + req.body.selectedInactiveUser.Name);
-									console.log(ret);
 									res1.json(ret);
 								});
 							}
