@@ -15,16 +15,20 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 app.controller('HomeCtrl', ['$scope', '$resource', 
     function($scope, $resource){
+		$scope.showLoading = true;
 		var flosumUsers = $resource('/api/activeUsers');
         flosumUsers.query(function(Users){
+			$scope.showLoading = false;
 			$scope.activeFlosumUsers = Users;
         });
 	}]);
 
 app.controller('switchUserCtrl', ['$scope', '$resource', '$location', 
     function($scope, $resource, $location){
+		$scope.showLoading = true;
 		var flosumUsers = $resource('/api/switchUsers');
         flosumUsers.query(function(Users){
+			$scope.showLoading = false;
 			var activeUsers = [];
 			var inactiveUsers = [];
 			var i;
@@ -40,8 +44,10 @@ app.controller('switchUserCtrl', ['$scope', '$resource', '$location',
 			$scope.inactiveUsers = inactiveUsers;
 			
 			$scope.save = function(){
+				$scope.showLoading = true;
 				var doSwitch = $resource('/api/doSwitch');
 				doSwitch.save($scope.flosum, function(){
+					$scope.showLoading = false;
 					$location.path('/');
 				});
 			};
