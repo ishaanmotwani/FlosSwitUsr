@@ -12,7 +12,7 @@ router.get('/', function(req, res1) {
 		if (err) { return console.log(err); }
 
 		// querying the Flosum package Id
-		conn.query('SELECT Id,isActive, Name FROM User order by name', function(err, res3) {
+		conn.query('SELECT Id,isActive, Name FROM User where username != \'' + process.env.admin_username + '\' order by name', function(err, res3) {
 			if (err) { return console.error(err); }
 			if(res3.records.length){
 				res1.json(res3.records);
