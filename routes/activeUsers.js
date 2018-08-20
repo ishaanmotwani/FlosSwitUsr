@@ -23,7 +23,7 @@ router.get('/', function(req, res1) {
 					//console.log(res4);
 					if(res4.records.length){
 						var i;
-						var query = 'Select id,Name from User where isActive = true and  id in (\'';
+						var query = 'Select id,Name from User where companyName = \'Deloitte\' and isActive = true and  id in (\'';
 						for (i = 0; i < res4.records.length; i++) { 
 							if(i<(res4.records.length-1)){
 								query = query + res4.records[i].UserId + '\',\'';
